@@ -4,30 +4,22 @@ import csv
 hackaton = requests.get('https://www.mashina.kg/search//?currency=2&price_from=&price_to=').text
 hackaton1 = BS(hackaton, 'lxml')
 hackaton2 = hackaton1.find_all('h2',class_='name')
-# title = hackaton2.find('h2', class_='name').text
-# print(title)
-# print(hackaton2)
-# hackaton5 = hackaton1.find_all('div', class_='image-wrap')
-# print(hackaton5)
-# print(hackaton5)
-hackaton7 = hackaton1.find('img')
-# print(hackaton7)
-        # for i in hackaton7:
-        #     i.replace(None, '')
+hackaton7 = hackaton1.find_all('img', class_='lazy-image')
 
-for i in hackaton7:
-    # i.replace('None', '')
-    print(i.get('data-src'))
 
 hackaton3 = hackaton1.find_all('strong')
 for i in hackaton2:
+    # print(i.text)
     for i2 in hackaton3:
         # print(i2.text)
+        for i3 in hackaton7:
+            # print(i.get('data-src'))
             dict_ = {
-                'title': i.text.strip(),
-               'price': i2.text    
-            }
+                    'title': i.text.strip(),
+                  'price': i2.text ,
+                  'img': i3.get('data-src') 
+                }
             with open('csv_file.csv', 'a') as f:
-                names = ['title', 'price']
+                names = ['title', 'price', 'img']
                 writer1 = csv.DictWriter(f, delimiter='|', fieldnames=names)
                 writer1.writerow(dict_)
