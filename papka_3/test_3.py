@@ -46,19 +46,7 @@ print(task.read())
 print(task.set_deadline('31/12/2021'))
 print(task.todos)
 
-import datetime
-class ToDo(CreateMixin, DeleteMixin, UpdateMixin, ReadMixin):
-    todos = {}
-    def set_deadline(self, dedline):
-        new_date = datetime.datetime.now().strftime('%d/%m/%Y')
-        dedline = dedline.split('/')
-        new_date = new_date.split('/')
-        dedline = list(map(int, dedline))
-        new_date = list(map(int, new_date))
-        new_date = sum((new_date[0], new_date[1]*30, new_date[2]*365))
-        dedline = datetime.date(dedline[2], dedline[1], dedline[0])
-        new_date = datetime.date.today()
-        return (dedline - new_date).days
+
     
 
 
