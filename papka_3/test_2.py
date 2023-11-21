@@ -30,3 +30,18 @@ class ContactList(list):
 
 all_contacts = ContactList(['Ivan', 'Maris', 'Olga', 'Ivan Olya', 'Olya Ivan', 'ivan'])
 print(all_contacts.search_by_name('Olya')) 
+
+
+
+
+import datetime
+def func_start_time(func):
+    def wrapper():
+        print('Функция запущена ' + str(datetime.datetime.now())) # тут в место + можно использовать и , ответ один и тот же
+        func()
+    return wrapper
+
+@func_start_time
+def func():
+    print('Hello world')
+func()
